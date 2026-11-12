@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: voice-assistant-white-cherry
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: BREEZE_API_KEY
+        sync: false
+      - key: APP_PASSWORD
+        generateValue: true
